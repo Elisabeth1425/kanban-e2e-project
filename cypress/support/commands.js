@@ -23,3 +23,21 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('reactDndDragAndDrop', (sourceSelector, targetSelector) => {
+  cy.get(sourceSelector, { timeout: 10000 }).should('exist').then($source => {
+    const dataTransfer = new DataTransfer();
+
+    cy.wrap($source)
+      .trigger('dragstart', { dataTransfer, force: true });
+
+    cy.get(targetSelector, { timeout: 10000 }).should('exist')
+      .trigger('dragenter', { dataTransfer, force: true })
+      .trigger('dragover', { dataTransfer, force: true })
+      .trigger('drop', { dataTransfer, force: true });
+
+    cy.wrap($source)
+      .trigger('dragend', { dataTransfer, force: true });
+  });
+});
+
