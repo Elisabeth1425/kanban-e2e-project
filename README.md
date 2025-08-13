@@ -8,3 +8,7 @@
 ## Como rodar o projeto
 * npm i
 * npx cypress open
+
+## Onde os bugs foram executados
+* Sistema Operacional: Windows
+* Navegador: Chrome
